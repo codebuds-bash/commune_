@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="user.css">
+  <title>Commune - Create Post</title>
+</head>
+<body>
+  <header>
+    <h1>Create Post</h1>
+    <nav>
+      <a href="index.html">Back to Feed</a>
+    </nav>
+  </header>
+
+  <main>
+    <form id="post-form">
+      <label for="content">Content:</label>
+      <textarea id="content" name="content" rows="4" required></textarea>
+
+      <label for="image">Image (Optional):</label>
+      <input type="file" id="image" name="image" accept="image/*">
+
+      <button type="submit">Post</button>
+    </form>
+  </main>
+
+  <script>
+    const postForm = document.getElementById('post-form');
+
+    postForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const content = document.getElementById('content').value;
+      const imageInput = document.getElementById('image').files[0];
+
+      const formData = new FormData();
+      formData.append('content', content);
+      if (imageInput) {
+        formData.append('image', imageInput);
+      }
+
+      try {
+        const response = await fetch('http://localhost:5000/posts/create', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          alert('Post created successfully!');
+          window.location.href = 'index.html';
+        } else {
+          alert(result.message || 'Failed to create post.');
+        }
+      } catch (error) {
+        console.error('Error creating post:', error);
+        alert('An error occurred. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

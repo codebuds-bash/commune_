@@ -1,0 +1,362 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #333;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Header Styles */
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  a {
+    text-decoration: none;
+    color: #333;
+  }
+  .auth-btn {
+    text-decoration: none;
+  }
+  
+  .search-bar {
+    flex-grow: 1;
+  }
+  
+  .search-bar input {
+    width: 90%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    outline: none;
+    font-size: 14px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+  }
+  
+  .search-bar input:focus {
+    border-color: #6a11cb;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.2);
+  }
+  
+  /* Content Layout */
+  .content {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  /* Left Sidebar */
+  .sidebar-left {
+    width: 20%;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .sidebar-left h3 {
+    font-size: 16px;
+    color: #6a11cb;
+    margin-bottom: 15px;
+  }
+  
+  .sidebar-left ul {
+    list-style: none;
+  }
+  
+  .sidebar-left ul li {
+    font-size: 14px;
+    color: #555;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar-left ul li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: #f9f9ff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .main-content h2 {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .main-box {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #555;
+    font-size: 14px;
+  }
+  
+  /* Right Sidebar */
+  .sidebar-right {
+    width: 25%;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .communities h3,
+  .trending h3 {
+    font-size: 19px;
+    color: #6a11cb;
+    margin-bottom: 10px;
+  }
+  
+  .communities ul {
+    list-style: none;
+  }
+  
+  .communities ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 17px;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .circle {
+    width: 30px;
+    height: 30px;
+   
+    border-radius: 50%;
+    margin-right: 0px;
+  }
+  
+  .see-all {
+    font-size: 17px;
+    color: #2575fc;
+    text-decoration: none;
+  }
+  
+  .see-all:hover {
+    text-decoration: underline;
+  }
+  
+  .trending-box {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+  }
+
+.logo {
+  width: 190px;                 /* Set the width of the logo */
+  height: 50px;                /* Set the height of the logo */
+  margin-right: 15px;          /* Space between logo and next element */
+  object-fit: contain;         /* Maintain the aspect ratio of the logo */
+  transition: transform 0.3s ease; /* Smooth transition effect for scaling */
+}
+/* Logo Image Styling */
+.logo img {
+    width: 60px;          /* Set the width of the logo image */
+    height: auto;         /* Maintain the aspect ratio */
+    max-width: 100%;      /* Ensure the image doesn’t overflow the container */
+    display: block;       /* Remove any unwanted space below the image */
+  }
+
+  
+  
+  /* Image size control */
+  img {
+    max-width: 15%;  /* Ensures image does not exceed its container width */
+    height: auto;     /* Maintains the aspect ratio of the image */
+    object-fit: contain;  /* Ensures image fits well within its container */
+  }
+  
+  .communities ul li .circle img {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    object-fit: cover;   /* Ensure the image fully covers the circle */
+    border-radius: 50%;  /* Ensure the image stays round */
+  }
+
+
+/* Header Styles */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+  }
+  
+  .auth-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  
+  .auth-btn {
+    padding: 12px 15px;
+    margin-left: 20px;
+    background-color: #6a11cb;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+
+  
+  .auth-btn:hover {
+    background-color: #4e0eaa;
+  }
+  #profile-icon img {
+    width: 300px; /* Ensure width and height are equal */
+    height: auto;
+    border-radius: 50%; /* This makes it circular */
+    object-fit: cover; /* Ensures the image doesn't stretch or distort */
+    border: 2px solid #6a11cb; /* Optional: Add a border */
+    display: block; /* Ensures proper rendering */
+  }  
+  /* Hide the profile icon by default */
+  .hidden {
+    display: none;
+  }
+  
+
+
+
+  /* Feed Section */
+.feed {
+  margin-top: 20px;
+}
+
+.feed h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.post-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.post-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-username {
+  font-weight: bold;
+}
+
+.post-time {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.post-content {
+  margin-top: 10px;
+}
+
+.post-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.like-btn, .comment-btn {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.like-btn:hover, .comment-btn:hover {
+  background-color: #0056b3;
+}
+
+
+/* Style for Profile Image */
+.profile-image {
+  width: 50px; /* Smaller size */
+  height: 50px; /* Maintain square aspect */
+  border-radius: 50%; /* Make it round */
+  object-fit: cover; /* Ensures the image is well-cropped to fit inside the circle */
+}
+
+
+/* Profile Image Styling */
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Makes the image round */
+  object-fit: cover; /* Ensures the image is not stretched */
+}
+
+/* Post Image Styling */
+.post-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Adjustments to hide/show elements based on login state */
+.hidden {
+  display: none;
+}
+

@@ -1,0 +1,99 @@
+/* General styles for body */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f9fc;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Styling for the form container */
+#create-post-form {
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect on form container */
+#create-post-form:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Styling for textarea */
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  resize: none;
+  outline: none;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+/* Focus effect for textarea */
+textarea:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+/* Styling for file input */
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  background-color: #fafafa;
+}
+
+/* Styling for the submit button */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect on button */
+button:hover {
+  background-color: #45a049;
+}
+
+/* Styling for placeholders in inputs */
+textarea::placeholder, input[type="file"]::placeholder {
+  color: #999;
+}
+
+/* Responsive design: Adjust form for smaller screens */
+@media (max-width: 600px) {
+  #create-post-form {
+    padding: 20px;
+    width: 90%;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  textarea {
+    padding: 10px;
+    font-size: 14px;
+  }
+}

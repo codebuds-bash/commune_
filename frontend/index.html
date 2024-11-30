@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Modern Layout</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="/frontend/images/logo.png" alt="Logo">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for communities, topics, or people..." />
+            </div>
+            <div class="auth-section">
+                <a href="login.html" class="auth-btn" id="login-btn">Login</a>
+                <a href="register.html" class="auth-btn" id="register-btn">Register</a>
+                <a href="#" class="auth-btn hidden" id="logout-btn">Logout</a>
+                <div id="profile-icon" class="hidden">
+                    <img src="/frontend/images/default-profile.png" alt="Profile Icon" class="profile-image">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="content">
+            <!-- Left Sidebar -->
+            <aside class="sidebar-left">
+                <h3>Your Spaces</h3>
+                <ul>
+                    <li><a href="home.html"><img src="/frontend/images/house.png" alt="Home"> Home</a></li>
+                    <li><a href="profile.html"><img src="/frontend/images/profile.png" alt="Profile"> Profile</a></li>
+                    <li><a href="explore.html"><img src="/frontend/images/search.png" alt="Explore"> Explore</a></li>
+                    <li><a href="create-post.html"><img src="/frontend/images/add.png" alt="Create"> Create</a></li>
+                    <li><a href="events.html"><img src="/frontend/images/event.png" alt="Events"> Events</a></li>
+                    <li><a href="communities.html"><img src="/frontend/images/Communities.png" alt="Communities"> Communities</a></li>
+                    <li><a href="notifications.html"><img src="/frontend/images/Notifications.png" alt="Notifications"> Notifications</a></li>
+                    <li><a href="settings.html"><img src="/frontend/images/Settings.png" alt="Settings"> Settings</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <h2>Welcome Back!</h2>
+                <div class="main-box">
+                    <p>Discover trending posts, groups, and events here!</p>
+                </div>
+
+                <!-- Feed Section -->
+                <section class="feed" id="feed">
+                    <h3>Recent Posts</h3>
+                    <!-- Posts will be inserted here dynamically -->
+                </section>
+            </main>
+
+            <!-- Right Sidebar -->
+            <aside class="sidebar-right">
+                <section class="communities">
+                    <h3>Communities for you</h3>
+                    <ul>
+                        <li><a href="community/technology-enthusiasts.html">Technology Enthusiasts</a></li>
+                        <li><a href="community/art-design.html">Art & Design</a></li>
+                        <li><a href="community/health-wellness.html">Health & Wellness</a></li>
+                        <li><a href="community/travel-bloggers.html">Travel Bloggers</a></li>
+                    </ul>
+                    <a href="all-communities.html" class="see-all">See all communities</a>
+                </section>
+
+                <section class="trending">
+                    <h3>Trending Now</h3>
+                    <div class="trending-box">
+                        <p>Stay updated with the latest discussions happening in your circles.</p>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Authentication Buttons
+            const loginBtn = document.getElementById('login-btn');
+            const registerBtn = document.getElementById('register-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const profileIcon = document.getElementById('profile-icon');
+
+            // Handle user login state
+            function updateAuthState() {
+                const token = localStorage.getItem('token');
+                if (token) {
+                    loginBtn.style.display = 'none';
+                    registerBtn.style.display = 'none';
+                    logoutBtn.style.display = 'inline-block';
+                    profileIcon.classList.remove('hidden');
+                } else {
+                    loginBtn.style.display = 'inline-block';
+                    registerBtn.style.display = 'inline-block';
+                    logoutBtn.style.display = 'none';
+                    profileIcon.classList.add('hidden');
+                }
+            }
+
+            // Initial auth state update
+            updateAuthState();
+
+            // Logout functionality
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('token');
+                updateAuthState();
+                window.location.href = "index.html";
+            });
+
+            // Function to add post to feed
+            function addPostToFeed(post) {
+                const feedSection = document.getElementById('feed');
+
+                const profileImage = post.user?.profileImage || '/frontend/images/default-profile.png';
+                const username = post.user?.username || 'Anonymous';
+                const content = post.content || 'No content available';
+                const postImage = post.image 
+                    ? (post.image.startsWith('data:') 
+                        ? post.image 
+                        : `data:image/jpeg;base64,${post.image}`)
+                    : '/frontend/images/no-image.png';
+
+                const postElement = document.createElement('div');
+                postElement.classList.add('post');
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <img src="${profileImage}" alt="User Profile" class="profile-image">
+                        <span class="username">${username}</span>
+                    </div>
+                    <div class="post-content">${content}</div>
+                    <div class="post-image">
+                        <img src="${postImage}" alt="Post Image">
+                    </div>
+                `;
+                feedSection.prepend(postElement);
+            }
+
+            // Fetch and display posts
+            function fetchPosts() {
+                fetch('http://localhost:5000/api/posts', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch posts');
+                    }
+                    return response.json();
+                })
+                .then(posts => {
+                    const feedSection = document.getElementById('feed');
+                    // Clear existing posts
+                    feedSection.innerHTML = '<h3>Recent Posts</h3>';
+                    
+                    // Add each post to the feed
+                    posts.forEach(post => addPostToFeed(post));
+                })
+                .catch(error => {
+                    console.error('Error fetching posts:', error);
+                });
+            }
+
+            // Fetch posts if user is logged in
+            if (localStorage.getItem('token')) {
+                fetchPosts();
+            }
+        });
+    </script>
+</body>
+
+</html>
