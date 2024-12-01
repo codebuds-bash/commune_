@@ -1,0 +1,178 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #f9fafb;
+    color: #1f2937;
+    line-height: 1.5;
+}
+
+/* Container */
+.container {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-text h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.header-text p {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-link {
+    color: #2563eb;
+    background: none;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+}
+
+.btn-link:hover {
+    color: #1d4ed8;
+}
+
+/* Notifications */
+.notifications {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.notification {
+    background-color: white;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    padding: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.notification:hover {
+    transform: translateX(8px);
+}
+
+.notification.unread {
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+.notification-content {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Icon containers */
+.icon-container {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.icon-container.blue {
+    background-color: #dbeafe;
+    color: #2563eb;
+}
+
+.icon-container.green {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.icon-container.purple {
+    background-color: #f3e8ff;
+    color: #9333ea;
+}
+
+/* Icon styles - Replace with your icon system */
+.icon-comment, .icon-check, .icon-system {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* Notification details */
+.notification-details {
+    flex: 1;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.25rem;
+}
+
+.notification-header h3 {
+    font-weight: 600;
+    color: #111827;
+}
+
+.time {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.notification-details p {
+    color: #4b5563;
+    margin-bottom: 0.75rem;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .notification-content {
+        flex-direction: column;
+    }
+
+    .icon-container {
+        margin-bottom: 0.5rem;
+    }
+}

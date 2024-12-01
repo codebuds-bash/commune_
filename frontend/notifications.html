@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commune Notifications</title>
+    <link rel="stylesheet" href="notifications.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-text">
+                <h1>Notifications</h1>
+                <p>Stay updated with your project activities</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-primary">Mark all read</button>
+            </div>
+        </div>
+
+        <!-- Notifications Container -->
+        <div class="notifications">
+            <!-- Urgent Notification -->
+            <div class="notification unread urgent">
+                <div class="notification-content">
+                    <div class="icon-container red">
+                        <i class="icon-alert"></i>
+                    </div>
+                    <div class="notification-details">
+                        <div class="notification-header">
+                            <h3>Urgent: Server Performance Issue</h3>
+                            <span class="time">Just now</span>
+                        </div>
+                        <p>High CPU usage detected on production servers. Immediate attention required.</p>
+                        <div class="notification-actions">
+                            <button class="btn-link">View server status</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meeting Notification -->
+            <div class="notification unread">
+                <div class="notification-content">
+                    <div class="icon-container blue">
+                        <i class="icon-calendar"></i>
+                    </div>
+                    <div class="notification-details">
+                        <div class="notification-header">
+                            <h3>Team Meeting Scheduled</h3>
+                            <span class="time">5 min ago</span>
+                        </div>
+                        <p>Weekly sprint planning meeting scheduled for tomorrow at 10:00 AM.</p>
+                        <div class="notification-actions">
+                            <button class="btn-link">Add to calendar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comment Notification -->
+            <div class="notification unread">
+                <div class="notification-content">
+                    <div class="icon-container blue">
+                        <i class="icon-comment"></i>
+                    </div>
+                    <div class="notification-details">
+                        <div class="notification-header">
+                            <h3>New Comment on Project</h3>
+                            <span class="time">15 min ago</span>
+                        </div>
+                        <p>Sarah left a comment on your recent update about the project timeline.</p>
+                        <div class="notification-actions">
+                            <button class="btn-link">View comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Assignment -->
+            <div class="notification">
+                <div class="notification-content">
+                    <div class="icon-container orange">
+                        <i class="icon-task"></i>
+                    </div>
+                    <div class="notification-details">
+                        <div class="notification-header">
+                            <h3>New Task Assigned</h3>
+                            <span class="time">45 min ago</span>
+                        </div>
+                        <p>Alex has assigned you to review the latest UI designs for the dashboard.</p>
+                        <div class="notification-actions">
+                            <button class="btn-link">View task</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed Task -->
+            <div class="notification">
+                <div class="notification-content">
+                    <div class="icon-container green">
+                        <i class="icon-check"></i>
+                    </div>
+                    <div class="notification-details">
+                        <div class="notification-header">
+                            <h3>Task Completed</h3>
+                            <span class="time">1 hour ago</span>
+                        </div>
+                        <p>The design phase has been marked as complete by the team.</p>
+                        <div class="notification-actions">
+                            <button class="btn-link">View details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Update -->
+            <div class="notification">
+                <div class="notification-content">
+                    <div class="icon-container purple">
+                        <i class="icon-system"></i>
+                    </div>
+                    <div class="notification-details">
+                        <div class="notification-header">
+                            <h3>System Update Available</h3>
+                            <span class="time">2 hours ago</span>
+                        </div>
+                        <p>New features have been added to the project management dashboard.</p>
+                        <div class="notification-actions">
+                            <button class="btn-link">Learn more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone Notification -->
+            <div class="notification">
+                <div class="notification-content">
+                    <div class="icon-container yellow">
+                        <i class="icon-milestone"></i>
+                    </div>
+                    <div class="notification-details">
+                        <div class="notification-header">
+                            <h3>Project Milestone Reached</h3>
+                            <span class="time">3 hours ago</span>
+                        </div>
+                        <p>Successfully completed Phase 1 of the project ahead of schedule!</p>
+                        <div class="notification-actions">
+                            <button class="btn-link">View milestone</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Alert -->
+            <div class="notification">
+                <div class="notification-content">
+                    <div class="icon-container red">
+                        <i class="icon-security"></i>
+                    </div>
+                    <div class="notification-details">
+                        <div class="notification-header">
+                            <h3>Security Update Required</h3>
+                            <span class="time">4 hours ago</span>
+                        </div>
+                        <p>Please update your password to comply with new security policies.</p>
+                        <div class="notification-actions">
+                            <button class="btn-link">Update now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Update -->
+            <div class="notification">
+                <div class="notification-content">
+                    <div class="icon-container teal">
+                        <i class="icon-team"></i>
+                    </div>
+                    <div class="notification-details">
+                        <div class="notification-header">
+                            <h3>New Team Member</h3>
+                            <span class="time">5 hours ago</span>
+                        </div>
+                        <p>Welcome Emma Thompson to the development team!</p>
+                        <div class="notification-actions">
+                            <button class="btn-link">View profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,54 +1,127 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Post = require("../models/Post");
-const multer = require("multer");
-const path = require("path");
+const Post = require('../models/Post');
+const multer = require('multer');
+const path = require('path');
 
-// Multer setup for file uploads
+// Configure multer for file uploads
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Save images in the "uploads" folder
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Unique file names
-  },
-});
-const upload = multer({ storage });
-
-// Route: Create a new post
-router.post("/create", upload.single("image"), async (req, res) => {
-  try {
-    const { user, content } = req.body;
-
-    // Ensure required fields are provided
-    if (!user || !content || !req.file) {
-      return res.status(400).json({ message: "All fields are required" });
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function(req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + path.extname(file.originalname));
     }
-
-    // Save the post to the database
-    const post = new Post({
-      user,
-      content,
-      image: `/uploads/${req.file.filename}`, // Store image path
-    });
-
-    await post.save();
-    res.status(201).json({ message: "Post created successfully", post });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
 });
 
-// Route: Get all posts
-router.get("/feed", async (req, res) => {
-  try {
-    const posts = await Post.find().sort({ createdAt: -1 }); // Fetch all posts, newest first
-    res.status(200).json(posts);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith('image/') || file.mimetype.startsWith('video/')) {
+        cb(null, true);
+    } else {
+        cb(new Error('Invalid file type'), false);
+    }
+};
+
+const upload = multer({ 
+    storage: storage,
+    fileFilter: fileFilter,
+    limits: {
+        fileSize: 10 * 1024 * 1024 // 10MB limit
+    }
+});
+
+// Create a new post
+router.post('/', upload.single('media'), async (req, res) => {
+    try {
+        const { caption, privacy, location, feeling, userId } = req.body;
+        
+        const postData = {
+            userId,
+            caption,
+            privacy,
+            location,
+            feeling
+        };
+
+        if (req.file) {
+            postData.mediaUrl = req.file.filename;
+            postData.mediaType = req.file.mimetype.startsWith('image/') ? 'image' : 'video';
+        }
+
+        const post = new Post(postData);
+        await post.save();
+
+        res.status(201).json({
+            success: true,
+            data: post
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Error creating post'
+        });
+    }
+});
+
+// Get all posts
+router.get('/', async (req, res) => {
+    try {
+        const posts = await Post.find().sort({ createdAt: -1 });
+        res.json({
+            success: true,
+            data: posts
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Error fetching posts'
+        });
+    }
+});
+
+// Get single post
+router.get('/:id', async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                error: 'Post not found'
+            });
+        }
+        res.json({
+            success: true,
+            data: post
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Error fetching post'
+        });
+    }
+});
+
+// Delete post
+router.delete('/:id', async (req, res) => {
+    try {
+        const post = await Post.findByIdAndDelete(req.params.id);
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                error: 'Post not found'
+            });
+        }
+        res.json({
+            success: true,
+            message: 'Post deleted successfully'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Error deleting post'
+        });
+    }
 });
 
 module.exports = router;

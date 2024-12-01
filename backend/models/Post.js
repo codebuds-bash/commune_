@@ -1,22 +1,34 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const PostSchema = new mongoose.Schema({
-  user: {
-    type: String, // User's name or ID
-    required: true,
-  },
-  content: {
-    type: String, // Text content
-    required: true,
-  },
-  image: {
-    type: String, // URL or path to the image
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now, // Automatically store creation date
-  },
+const postSchema = new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true
+    },
+    caption: {
+        type: String,
+        required: true
+    },
+    mediaUrl: {
+        type: String
+    },
+    mediaType: {
+        type: String,
+        enum: ['image', 'video', null]
+    },
+    privacy: {
+        type: String,
+        enum: ['public', 'friends', 'private'],
+        default: 'public'
+    },
+    location: {
+        type: String
+    },
+    feeling: {
+        type: String
+    }
+}, {
+    timestamps: true  // Automatically adds createdAt and updatedAt fields
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model('Post', postSchema);

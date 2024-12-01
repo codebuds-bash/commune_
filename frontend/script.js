@@ -1,36 +1,27 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const loginBtn = document.getElementById("login-btn");
-  const signupBtn = document.getElementById("signup-btn");
-  const profileIcon = document.getElementById("profile-icon");
+const uploadForm = document.getElementById('uploadForm');
+const imageGallery = document.getElementById('imageGallery');
 
-  // Mock authentication status (replace with actual logic in real application)
-  let isAuthenticated = false;
+uploadForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
 
-  // Simulate login action
-  loginBtn.addEventListener("click", () => {
-    isAuthenticated = true;
-    updateAuthUI();
-  });
-
-  // Simulate signup action
-  signupBtn.addEventListener("click", () => {
-    isAuthenticated = true;
-    updateAuthUI();
-  });
-
-  // Function to update UI based on authentication status
-  function updateAuthUI() {
-    if (isAuthenticated) {
-      loginBtn.classList.add("hidden");
-      signupBtn.classList.add("hidden");
-      profileIcon.classList.remove("hidden");
+  const formData = new FormData(uploadForm);
+  try {
+    const response = await fetch('/upload', {
+      method: 'POST',
+      body: formData,
+    });
+    const result = await response.json();
+    if (response.ok) {
+      const imgElement = document.createElement('img');
+      imgElement.src = result.imageUrl;
+      imgElement.alt = 'Uploaded Image';
+      imgElement.style.width = '200px'; // Adjust as needed
+      imgElement.style.margin = '10px';
+      imageGallery.appendChild(imgElement);
     } else {
-      loginBtn.classList.remove("hidden");
-      signupBtn.classList.remove("hidden");
-      profileIcon.classList.add("hidden");
+      alert(result.message);
     }
+  } catch (error) {
+    console.error('Error uploading image:', error);
   }
-
-  // Initialize the UI
-  updateAuthUI();
 });
